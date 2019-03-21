@@ -1,0 +1,46 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-warning" style="margin: 5px 0px 5px 25px;background-color:green;border-radius:5px 20px 5px 20px"><a href="{{url_for('addGameDetails',gfname=gfs.name)}}" style="text-decoration: none;color:yellow;"><strong>Add New Game</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px;">
+{% for gfe in gfes %}
+
+	<div class="col-sm-4 text-center">
+		<div class="panel panel-primary"style="background-color:powderblue;border: none !important;">
+			<div class="panel-heading" style="background-color:	
+ORANGERED;border-radius:10px 30px 10px 30px">
+				<h4 >{{ gfe.gamename }}</h4>
+			</div>
+			<div class="panel-body text-center" style="background-color:MOCCASIN;border-radius:10px 30px 10px 30px">
+				<table>
+					<tr><th>NAME</th><td>:</td><td><h5>{{ gfe.name }}</h5></td></tr>
+					<tr><th>DESCRIPTION</th><td>:</td><td><h5>{{ gfe.description }}</h5></td></tr>
+					<tr><th>PUBLISHER</th><td>:</td><td><h5>{{ gfe.publisher }}</h5></td></tr>
+				</table>
+			</div>
+			{% if 'username' in session %}
+			<div class="panel-footer" style="background-color:#F8FA74;border-radius:10px 30px 10px 30px">
+					<button type="button" class="btn btn-info"style="background-color:green;border-radius:5px 20px 5px 20px"><a href="{{ url_for('editGame',gfid=gfs.id,gfename=gfe.name) }}"style="text-decoration: none;color:white;">EDIT</a></button>
+					<button type="button" class="btn btn-danger" style="background-color:red;border-radius:5px 20px 5px 20px"><a href="{{ url_for('deleteGame',gfid=gfs.id,gfename=gfe.name)}}"style="text-decoration: none;color:white;">DELETE</a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>

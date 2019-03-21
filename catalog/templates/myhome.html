@@ -1,0 +1,72 @@
+<head>
+<title>Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.mySlides {display:none;}
+</style>
+</head>
+
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+  <!-- {% for gf in gfs_cat %}
+    <a href="{{ url_for('showPlatforms',gfid=gf.id)}}">{{gf.name}}</a><br>
+    {% endfor %} -->
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+	{% endwith %}
+	<center>
+	<div class="text-center">
+		<!-- <h1>Welcome to GamesHub</h1> --->
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://compass-ssl.xbox.com/assets/cf/7c/cf7cba96-8258-4fd2-afa0-9a8de00d1ee4.jpg?n=Windows-10-Games_Content-Placement-0_COD-Infinite-Warefare_740x417.jpg">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://cdn.wccftech.com/wp-content/uploads/2018/10/fallout-76-logo.jpg">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://image.redbull.com/rbcom/010/2015-10-27/1331756170182_2/0100/0/1/8-things-far-cry-primal-needs-to-survive.jpeg">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE2iCvo">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://i0.wp.com/www.fortressofsolitude.co.za/wp-content/uploads/2018/12/PlayerUnknowns-Battlegrounds-PUBG-PS4-Review-Perhaps-The-Wait-Wasnt-Worth-It.jpg?fit=1244%2C700&ssl=1">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://cdn.images.dailystar.co.uk/dynamic/184/photos/364000/620x/FIFA-19-How-EA-Sports-can-ensure-another-year-of-PS4-and-Xbox-dominance-over-PES-2019-705043.jpg">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://static.altchar.com/live/media/images/950x633_ct/10596_Resident_Evil_2_MAIN_8bd79736ec3d249e9007668fe2ffd5b7.jpg">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://ae01.alicdn.com/kf/HTB1fjS8OVXXXXbRaXXXq6xXFXXXd/Custom-Canvas-Art-Grand-Theft-Auto-Poster-GTA-5-San-Andreas-Game-Wallpaper-Grand-Theft-Wall.jpg_640x640.jpg">
+		<img class="mySlides" style="width: 750px; height: 500px; margin: 0; padding:0; margin-top: 50px;margin-left:200px; border-radius:10px 40px 10px 40px" src="https://i.ytimg.com/vi/s95cR-0JK4Q/maxresdefault.jpg">
+		
+		
+	</div>
+	</center>
+	
+	<!--<div class="w3-content w3-section" style="max-width:500px">
+		<img class="mySlides" src="farcryprimal.jpg" style="width: 750px; height: 400px; margin: 0; padding: 0; margin-top: 50px">
+		<img class="mySlides" src="fallout4.jpg" style="width: 750px; height: 400px; margin: 0; padding: 0; margin-top: 50px">
+		<img class="mySlides" src="callofduty.jpg" style="width: 750px; height: 400px; margin: 0; padding: 0; margin-top: 50px">
+	</div>
+	</div>-->
+
+	<script>
+	var myIndex = 0;
+	carousel();
+
+	function carousel() 
+	{
+	var i;
+	var x = document.getElementsByClassName("mySlides");
+	for (i = 0; i < x.length; i++) 
+	{
+		x[i].style.display = "none";  
+	}
+	myIndex++;
+	if (myIndex > x.length) {myIndex = 1}    
+	x[myIndex-1].style.display = "block";  
+	setTimeout(carousel, 2000); // Change image every 2 seconds
+	}
+	</script>
+
+    
+{% endblock content %}
+</div>

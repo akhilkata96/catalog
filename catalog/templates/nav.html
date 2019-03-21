@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> PLATFORMS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+  <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+  <style>
+    body {
+      font-family:Georgia;
+	  background-color:powderblue;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 310px;
+      position: fixed;
+      z-index: 1;
+      top: 50px;
+      left: 0;
+      background: rgb(10,183,254);
+background: radial-gradient(circle, rgba(10,183,254,1) 0%, rgba(0,83,255,1) 57%, rgba(31,4,245,0.9110994739692753) 100%);
+      overflow-x: hidden;
+      padding-top: 20px;
+	  
+    }
+
+    .sidenav a {
+      padding: 6px 6px 6px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #990000;
+	  font-family:Kristen ITC;
+	  font-size:20px;
+	  transition:0.4s;
+	 background-color:#ffff00;
+	  border-radius:30px
+    }
+	.sidenav a:focus{
+		background-color:Red;
+		color:yellow;
+		}
+
+    .main {
+      margin-left: 300px; /* Same as the width of the sidenav */
+
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+	
+  </style>
+  {% block head %}{% endblock head %}
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <script>
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+              alert(messages[i]);
+            }
+          </script>
+        {% endif %}
+{% endwith %}
+<nav class="navbar navbar-inverse  navbar-fixed-top" style="color:white">
+  <div class="container-fluid" style="background: rgb(108,57,218);
+background: radial-gradient(circle, rgba(108,57,218,0.9839286056219363) 35%, rgba(0,113,255,1) 50%, rgba(145,4,245,0.9110994739692753) 92%);">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('home') }}" style="background-color:#660033;font-size:30px;font-family:Algerian;border-radius:30px"><b>Platform</b></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" >
+      {% if 'username' in session %}
+            <li><button class="btn btn-warning mr-sm-2" style="margin-top: 5px;background-color:green;border-radius:5px 20px 5px 20px"><a href="{{ url_for('addPlatforms')}}" style="color:yellow;">ADD PLATFORMS</a></button></li>
+            <li style="margin: 10px;"><p class="text-primary mr-sm-2" style="color:white">{{ session.username }}</p></li>
+			
+            <li><a href="{{ url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
+      {% else %}
+            <li><a href="{{ url_for('showLogin')}}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+      {% endif %}
+      
+    </ul>
+  </div>
+</nav>
+  
+<div class="sidenav">
+  <table>
+      {% for gf in gfs_cat %}
+      <tr>
+          <td><a href="{{ url_for('showPlatforms',gfid=gf.id)}}">{{gf.name}}</a></td>
+          {% if 'username' in session %}
+            <td><a href = "{{ url_for('editPlatforms',gfid=gf.id)}}">
+            <span class="glyphicon glyphicon-pencil pull-right " data-toggle="tooltip" title="Edit Platforms" data-placement="bottom"> </span> </a></td>
+            <td><a href = "{{ url_for('deletePlatforms',gfid=gf.id)}}">
+            <span class="glyphicon glyphicon-trash pull-right" data-toggle="tooltip" title="Delete Platforms" data-placement="top"> </span> </a></td>  
+          {% endif %}   
+        </tr>              
+      {% endfor %}
+  </table>
+</div>
+<div class="container">
+
+      <div class="main" style="margin-top: 100px;">
+        
+            {% block content %}
+              
+            {% endblock content %}
+          
+        </div>
+  </div>
+  
+</body>
+</html>
